@@ -31,9 +31,9 @@ void DrawStatusBar(void)
 	DISPLAY_Fill(0, 159, 0, 96, COLOR_BACKGROUND);
 	// DISPLAY_DrawRectangle0(0, 41, 160, 1, gSettings.BorderColor);
 
-	#ifdef ENABLE_STATUS_BAR_LINE
+	//#ifdef ENABLE_STATUS_BAR_LINE
 		DISPLAY_DrawRectangle0(0, 83, 160, 1, gSettings.BorderColor);
-	#endif
+	//#endif
 
 	if (gSettings.DtmfState == DTMF_STATE_STUNNED) {
 		UI_DrawStatusIcon(4, ICON_LOCK, true, COLOR_RED);
@@ -121,7 +121,7 @@ void UI_DrawBattery(bool bDisplayVoltage)
 		gShortString[2] = gShortString[1];
 		gShortString[1] = '.';
 		gShortString[3] = 'V';
-		UI_DrawSmallString(109, 86, gShortString, 4);
+		UI_DrawSmallString(109, 86, gShortString, 4); 
 	}
 }
 
