@@ -58,7 +58,7 @@ void FREQUENCY_SelectBand(uint32_t Frequency)
 	uint8_t Band;
 	uint8_t Level;
 
-	if (Frequency >= 13600000  && Frequency <= 17400000) {
+	if (Frequency >= 1000000  && Frequency <= 17400000) {
 		Band = BAND_136MHz;
 		Level = (Frequency - 13500000) / 500000;
 		gUseUhfFilter = false;
