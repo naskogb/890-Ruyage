@@ -117,13 +117,18 @@ void SETTINGS_LoadSettings(void)
 		gExtendedSettings.SqNoiseBase = 0x44;
 		gExtendedSettings.SqGlitchBase = 0x11;
 	}
-
+	if (gExtendedSettings.Devi == 5) {
+		gExtendedSettings.Devi = 4;
+	}
+    if (gExtendedSettings.ScanDelay == 63) {
+		gExtendedSettings.ScanDelay = 35;
+	}
 	gFrequencyStep = FREQUENCY_GetStep(gSettings.FrequencyStep);
 
 	UI_SetColors(gExtendedSettings.DarkMode);
 
-	if (gExtendedSettings.MicGainLevel > 31) {
-		gExtendedSettings.MicGainLevel = 19;
+	if (gExtendedSettings.MicGainLevel > 61) {
+		gExtendedSettings.MicGainLevel = 35;
 	}
 	BK4819_SetMicSensitivityTuning();
 
