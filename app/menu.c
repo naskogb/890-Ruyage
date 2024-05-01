@@ -65,7 +65,7 @@ static const char Menu[][14] = {
 	"VOX Delay     ",
 	"RX Save Mode  ",
 	"Scan Direction",
-	"Deviation     ",
+	"DEVIATION     ",
 	"Scan Delay    ",
 	"Scan Resume   ",
 	"Scan Blink    ",
