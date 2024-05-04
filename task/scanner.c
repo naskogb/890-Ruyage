@@ -53,12 +53,12 @@ void Task_Scanner(void) {
 		// we have to slow down the scan speed in FM broadcast mode
 		// because we do not redraw VFO so the chip does not have time
 		// to catch incoming signal
-		SCANNER_Countdown =
+		SCANNER_Countdown =	
 #ifdef ENABLE_FM_RADIO
 				gFM_Mode > FM_MODE_OFF ? 50 :
 #endif
-				15;
-		if (gExtendedSettings.ScanBlink) {
+				gExtendedSettings.ScanDelay;
+	    if (gExtendedSettings.ScanBlink) {
 			gpio_bits_flip(GPIOA, BOARD_GPIOA_LED_GREEN);
 		}
 	}

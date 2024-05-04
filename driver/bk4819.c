@@ -745,13 +745,13 @@ void BK4819_EnableRfTxDeviation(void)
 {
 	uint16_t Deviation;
 
-	Deviation = gMainVfo->bIsNarrow ? gFrequencyBandInfo.TxDeviationNarrow : gFrequencyBandInfo.TxDeviationWide;
+	Deviation = gMainVfo->bIsNarrow ? gFrequencyBandInfo.TxDeviationNarrow : gFrequencyBandInfo.TxDeviationWide+gExtendedSettings.Devi*100;
 	if (gMainVfo->Scramble) {
 		Deviation -= 200;
 	}
+	//Deviation += gExtendedSettings.Devi*100;
 	BK4819_WriteRegister(0x40, Deviation);
 }
-
 void BK4819_SetMicSensitivityTuning(void)
 {
 	BK4819_WriteRegister(0x7D, 0xE940 | (gExtendedSettings.MicGainLevel & 0x1F));

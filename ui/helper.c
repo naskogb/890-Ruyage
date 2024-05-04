@@ -728,7 +728,7 @@ void UI_DrawFM(void)
 	gColorForeground = COLOR_GREY;
 	DISPLAY_Fill(0, 159, 1, 81, COLOR_BACKGROUND);
 	#ifndef ENABLE_STATUS_BAR_LINE
-		DISPLAY_DrawRectangle0(0, 81, 160, 1, gSettings.BorderColor);
+		DISPLAY_DrawRectangle0(0, 83, 160, 1, gSettings.BorderColor);
 	#endif
 	UI_DrawFrame(12, 150, 6, 74, 2, gColorForeground);
 	UI_DrawFrame(72, 144, 36, 64, 2, gColorForeground);
@@ -949,7 +949,7 @@ void UI_DrawRadar(void)
 {
 	DISPLAY_Fill(0, 159, 1, 81, COLOR_BACKGROUND);
 	#ifndef ENABLE_STATUS_BAR_LINE
-		DISPLAY_DrawRectangle0(0, 81, 160, 1, gSettings.BorderColor);
+		DISPLAY_DrawRectangle0(0, 83, 160, 1, gSettings.BorderColor);
 	#endif
 	gColorForeground = COLOR_BLUE;
 	UI_DrawBitmap(4, 12, 8, 64, BitmapRadar);
@@ -1070,17 +1070,17 @@ void UI_DrawScan(void)
 	gColorForeground = COLOR_RED;
 	UI_DrawStatusIcon(4, ICON_SCAN, gScannerMode, gColorForeground);
 	if (!gScannerMode) {
-		UI_DrawSmallString(18, 86, " ", 1);
+		UI_DrawSmallString(18, 86, "     ", 5);
 	} else {
 		if (gSettings.WorkMode) {
-			UI_DrawSmallString(18, 86, gExtendedSettings.ScanAll ? "A" :
-									   gExtendedSettings.CurrentScanList == 0 ? "1" :
-									   gExtendedSettings.CurrentScanList == 1 ? "2" :
-									   gExtendedSettings.CurrentScanList == 2 ? "3" :
-									   gExtendedSettings.CurrentScanList == 3 ? "4" :
-									   gExtendedSettings.CurrentScanList == 4 ? "5" :
-									   gExtendedSettings.CurrentScanList == 5 ? "6" :
-									   gExtendedSettings.CurrentScanList == 6 ? "7" : "8", 1);
+			UI_DrawSmallString(18, 86, gExtendedSettings.ScanAll ? "ALL  " :
+									   gExtendedSettings.CurrentScanList == 0 ? "LIST1" :
+									   gExtendedSettings.CurrentScanList == 1 ? "LIST2" :
+									   gExtendedSettings.CurrentScanList == 2 ? "LIST3" :
+									   gExtendedSettings.CurrentScanList == 3 ? "LIST4" :
+									   gExtendedSettings.CurrentScanList == 4 ? "LIST5" :
+									   gExtendedSettings.CurrentScanList == 5 ? "LIST6" :
+									   gExtendedSettings.CurrentScanList == 6 ? "LIST7" : "LIST8", 5);
 		}
 	}
 }
@@ -1088,7 +1088,7 @@ void UI_DrawScan(void)
 #ifdef ENABLE_SCANLIST_DISPLAY
 void UI_DrawScanLists(uint8_t Vfo)
 {
-	gColorForeground = COLOR_GREY;
+	gColorForeground = COLOR_FOREGROUND;
 	for (uint8_t i = 0; i < 8; i++) {
 		gShortString[0] = (((gVfoState[Vfo].IsInscanList >> i) & 1 ) ? (49 + i) : '-');
 		UI_DrawSmallString(26 + (i * 12), Vfo ? 2 : 43, gShortString, 1);

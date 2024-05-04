@@ -128,7 +128,7 @@ static bool TuneTX(bool bUseMic)
 
 	gCode = gVfoInfo[gCurrentVfo].Code;
 	BK4819_SetFrequency(gVfoInfo[gCurrentVfo].Frequency);
-	if (gSettings.BandInfo[gCurrentFrequencyBand] == BAND_136MHz && gVfoInfo[gCurrentVfo].Frequency >= 13600000) {
+	if (gSettings.BandInfo[gCurrentFrequencyBand] == BAND_136MHz && gVfoInfo[gCurrentVfo].Frequency >= 1000000) {
 		BK4819_EnableFilter(false);
 		if (gMainVfo->bMuteEnabled) {
 			CSS_SetCustomCode(gMainVfo->bIs24Bit, gMainVfo->Golay, gMainVfo->bIsNarrow);
@@ -360,7 +360,7 @@ void RADIO_EndRX(void)
 			FM_Resume();
 		}
 #endif
-		gIncomingTimer = 1;
+		gIncomingTimer = 100;
 	} else {
 		gSignalFound = true;
 		gDetectorTimer = 500;
@@ -382,7 +382,7 @@ void RADIO_EndAudio(void)
 	SPEAKER_TurnOff(SPEAKER_OWNER_RX);
 	gRxLinkCounter = 0;
 	gNoToneCounter = 0;
-	gIncomingTimer = 1;
+	gIncomingTimer = 250;
 #ifdef ENABLE_NOAA
 	NOAA_NextChannelCountdown = 3000;
 #endif

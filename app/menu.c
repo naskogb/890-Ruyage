@@ -65,6 +65,8 @@ static const char Menu[][14] = {
 	"VOX Delay     ",
 	"RX Save Mode  ",
 	"Scan Direction",
+	"DEVIATION     ",
+	"Scan Delay    ",
 	"Scan Resume   ",
 	"Scan Blink    ",
 	"Squelch Mode  ",
@@ -474,6 +476,16 @@ void MENU_AcceptSetting(void)
 	case MENU_REPEATER_MODE:
 		gSettings.RepeaterMode = (gSettingCurrentValue + gSettingIndex) % gSettingMaxValues;
 		UI_DrawRepeaterMode();
+		SETTINGS_SaveGlobals();
+		break;
+    
+    case MENU_DEVIATION:
+		gExtendedSettings.Devi = (gSettingCurrentValue + gSettingIndex) % gSettingMaxValues;
+		SETTINGS_SaveGlobals();
+		break;
+
+	case MENU_SCAN_DELAY:
+		gExtendedSettings.ScanDelay = (gSettingCurrentValue + gSettingIndex) % gSettingMaxValues;
 		SETTINGS_SaveGlobals();
 		break;
 
@@ -889,6 +901,21 @@ void MENU_DrawSetting(void)
 		UI_DrawSettingRepeaterMode(gSettingCurrentValue);
 		break;
 
+	case MENU_DEVIATION:
+		gSettingCurrentValue = gExtendedSettings.Devi;
+		gSettingMaxValues = 5;
+		DISPLAY_Fill(0, 159, 1, 55, COLOR_BACKGROUND);
+		UI_DrawSettingNumList(gSettingCurrentValue, gSettingMaxValues);
+		break;
+
+
+	case MENU_SCAN_DELAY:
+		gSettingCurrentValue = gExtendedSettings.ScanDelay;
+		gSettingMaxValues = 62;
+		DISPLAY_Fill(0, 159, 1, 55, COLOR_BACKGROUND);
+		UI_DrawSettingNumList(gSettingCurrentValue, gSettingMaxValues);
+		break;
+
 	case MENU_SCAN_RESUME:
 		gSettingCurrentValue = gExtendedSettings.ScanResume - 1;
 		gSettingMaxValues = 3;
@@ -930,7 +957,7 @@ void MENU_DrawSetting(void)
 
 	case MENU_MIC_GAIN:
 		gSettingCurrentValue = gExtendedSettings.MicGainLevel;
-		gSettingMaxValues = 32;
+		gSettingMaxValues = 62;
 		DISPLAY_Fill(0, 159, 1, 55, COLOR_BACKGROUND);
 		UI_DrawSettingNumList(gSettingCurrentValue, gSettingMaxValues);
 		break;
@@ -1328,7 +1355,15 @@ void MENU_ScrollSetting(uint8_t Key)
 		UI_DrawSettingRepeaterMode(gSettingCurrentValue);
 		break;
 
-	case MENU_SCAN_RESUME:
+case MENU_DEVIATION:
+		UI_DrawSettingNumList(gSettingCurrentValue, 5);
+		break;
+
+	case MENU_SCAN_DELAY:
+		UI_DrawSettingNumList(gSettingCurrentValue, 62);
+		break;
+
+    case MENU_SCAN_RESUME:
 		UI_DrawSettingScanResume(gSettingCurrentValue);
 		break;
 
@@ -1337,7 +1372,7 @@ void MENU_ScrollSetting(uint8_t Key)
 		break;
 
 	case MENU_MIC_GAIN:
-		UI_DrawSettingNumList(gSettingCurrentValue, 32);
+		UI_DrawSettingNumList(gSettingCurrentValue, 62);
 		break;
 
 	case MENU_SQUELCH_MODE:
